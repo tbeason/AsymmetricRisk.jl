@@ -10,7 +10,7 @@ Univariate measures:
  - [ ] VaR-based (Expected Shortfall / Expected Longrise)
  
 Bivariate measures:
- - [ ] Correlation-based (Ang & Chen 2001 + statistical test of Hong, Tu, & Zhou 2007)
+ - [ ] Correlation-based (Ang & Chen 2001 + statistical test of Hong, Tu, & Zhou 2007 + one-sided as in Schreindorfer 2019)
  - [ ] Beta-based (Ang, Chen, & Xing 2006)
  - [ ] Entropy-based (Jiang, Wu, & Zhou 2018)
  - [ ] Coskewness (Harvey & Siddique 2000)
