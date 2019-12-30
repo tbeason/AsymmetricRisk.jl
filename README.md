@@ -15,6 +15,14 @@ Bivariate measures:
  - [ ] Entropy-based (Jiang, Wu, & Zhou 2018)
  - [ ] Coskewness (Harvey & Siddique 2000)
  - [ ] Quantile dependence
+ 
+ 
+ ### Dependencies
+  - StatsBase, Statistics (?), LinearAlgebra (?)
+  - KernelDensity
+  - HCubature
+  - GLM (?)
+  - Distributions
   
 
 
