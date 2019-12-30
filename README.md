@@ -6,7 +6,7 @@ _This package is currently under development. Posting to the Julia General Regis
 
 Univariate measures:
  - [ ] Variance-based (semi-variance)
- - [ ] Entropy-based 
+ - [ ] Lower partial moments (Harlow 1991)
  - [ ] VaR-based (Expected Shortfall / Expected Longrise)
  
 Bivariate measures:
