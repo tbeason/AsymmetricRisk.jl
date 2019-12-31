@@ -12,7 +12,7 @@ _This package is currently under development. Posting to the Julia General Regis
 
 Univariate measures:
  - [ ] Variance-based (semi-variance)
- - [ ] Lower partial moments (Harlow 1991)
+ - [X] Lower partial moments (Harlow 1991)
  - [ ] VaR-based (Expected Shortfall / Expected Longrise)
  
 Bivariate measures:
@@ -21,14 +21,24 @@ Bivariate measures:
  - [ ] Entropy-based (Jiang, Wu, & Zhou 2018)
  - [ ] Coskewness (Harvey & Siddique 2000)
  - [ ] Quantile dependence
- 
- 
- ### Dependencies
-  - StatsBase, Statistics (?), LinearAlgebra (?)
-  - KernelDensity
-  - HCubature
-  - GLM (?)
-  - Distributions
+
+## Usage
+From the Julia REPL type
+```
+]add https://github.com/tbeason/AsymmetricRisk.jl.git
+```
+which will clone the repository.
+
+You can then use the package by typing
+```
+using AsymmetricRisk
+```
+
+See the [docs](https://tbeason.github.io/AsymmetricRisk.jl/stable) for more information.
+
+
+
+
   
 
 
