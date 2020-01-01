@@ -40,5 +40,18 @@ function lowerpartialmom(x,t,n)
 end
 
 
+"""
+    upperpartialmom(x,t,n)
+
+`n`-th Upper Partial Moment for vector-like `x` using target `t`. 
+
+Source: Harlow (1991)
+"""
+function upperpartialmom(x,t,n)
+    bigN = length(x)
+    return sum(filter(z->z>=0,x .- t).^n)/bigN
+end
+
+
 
 
