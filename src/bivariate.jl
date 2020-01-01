@@ -1,8 +1,13 @@
 
-"""
-quantiledep(x,y,q)
+@doc raw"""
+	quantiledep(x,y,q)
 
 Quantile Dependence at the `q`-th quantile of vector-like data `x` and `y`.
+
+Let ``q_x`` and ``q_y`` be the `q`-th quantiles of `x` and `y`.
+
+Returns ``E[xy | x \leq q_x, y \leq q_y] / q`` if `q<=0.5` and
+``(1 -2q + E[xy | x \leq q_x, y \leq q_y]) / (1-q)`` otherwise.
 """
 function quantiledep(x,y,q)
     qx = quantile(x,q)
@@ -16,6 +21,49 @@ function quantiledep(x,y,q)
 end
 
 
+
+# x here is "the market return"
+
+@doc raw"""
+	coskewness(x,y)
+
+Computes the coskewness between vectors `x` and `y`. The vector `x` receives the
+powers in the expression.
+
+``\frac{E[(x - E[x])^2 (y-E[y])]}{\sigma_x^2 \sigma_y}``
+
+"""
+function coskewness(x,y)
+    dmx = x .- mean(x)
+    dmy = y .- mean(y)
+    top = mean( dmy .* (dmx.^2))
+    bot = std(dmy) * var(dmx)
+    return top/bot
+end
+
+@doc raw"""
+	cokurtosis(x,y;kind::Symbol=:asymmetric)
+
+Computes the cokurtosis between vectors `x` and `y`. The default is asymmetric cokurtosis.
+
+`kind=:asymmetric`:
+``\frac{E[(x - E[x])^3 (y-E[y])]}{\sigma_x^3 \sigma_y}``
+
+`kind=:symmetric`:
+``\frac{E[(x - E[x])^2 (y-E[y])^2]}{\sigma_x^2 \sigma_y^2}``
+"""
+function cokurtosis(x,y;kind::Symbol=:asymmetric)
+    dmx = x .- mean(x)
+    dmy = y .- mean(y)
+    if kind == :symmetric
+        top = mean( (dmy.^2) .* (dmx.^2))
+        bot = var(dmy) * var(dmx)
+    else
+        top = mean( dmy .* (dmx.^3))
+        bot = std(dmy)  * std(dmx)^3
+    end
+    return top/bot
+end
 
 
 #### TODO

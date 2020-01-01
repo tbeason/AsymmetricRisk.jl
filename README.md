@@ -19,8 +19,8 @@ Bivariate measures:
  - [ ] Correlation-based (Ang & Chen 2001 + statistical test of Hong, Tu, & Zhou 2007 + one-sided as in Schreindorfer 2019)
  - [ ] Beta-based (Ang, Chen, & Xing 2006)
  - [ ] Entropy-based (Jiang, Wu, & Zhou 2018)
- - [ ] Coskewness (Harvey & Siddique 2000)
- - [ ] Quantile dependence
+ - [X] Coskewness (Harvey & Siddique 2000)
+ - [X] Quantile dependence
 
 ## Usage
 From the Julia REPL type
