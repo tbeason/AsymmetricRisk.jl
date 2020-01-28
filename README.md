@@ -17,7 +17,7 @@ Univariate measures:
  
 Bivariate measures:
  - [ ] Correlation-based (Ang & Chen 2001 + statistical test of Hong, Tu, & Zhou 2007 + one-sided as in Schreindorfer 2019)
- - [ ] Beta-based (Ang, Chen, & Xing 2006)
+ - [X] Beta-based (Ang, Chen, & Xing 2006)
  - [ ] Entropy-based (Jiang, Wu, & Zhou 2018)
  - [X] Coskewness (Harvey & Siddique 2000)
  - [X] Quantile dependence
@@ -25,7 +25,7 @@ Bivariate measures:
 ## Usage
 From the Julia REPL type
 ```
-]add https://github.com/tbeason/AsymmetricRisk.jl.git
+]add https://github.com/tbeason/AsymmetricRisk.jl
 ```
 which will clone the repository.
 

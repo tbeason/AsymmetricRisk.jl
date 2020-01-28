@@ -22,6 +22,85 @@ end
 
 
 
+
+"""
+	exceedancecor(x,y,c;kind=:both,side=:lower)
+
+Computes exceedance correlations between `x` and `y`, using exceedance threshold `c`.
+Keyword `kind` refers to which type of conditioning: `:both` conditions on `x` and `y` simultaneously,
+while `:onx` conditions only on `x`. Keyword `side` refers to look below (`:lower`) or above (`:upper`)
+the threshold `c`. Inputs `x` and `y` are standardized before conditioning, 
+so `c` should be in standard deviation units.
+"""
+function exceedancecor(x,y,c;kind=:both,side=:lower)
+    xs = standardize(x)
+	ys = standardize(y)
+    if side==:lower
+        if kind==:both
+            loc = (xs .<= c) .& (ys .<= c)
+        elseif kind==:onx
+            loc = (xs .<= c)
+        end
+    elseif side==:upper
+        if kind==:both
+            loc = (xs .>= c) .& (ys .>= c)
+        elseif kind==:onx
+            loc = (xs .>= c)    
+        end
+    end
+	return cor(xs[loc],ys[loc])
+end
+
+
+
+
+"""
+	downsidebeta(x,y;kind=:both)
+
+Computes the downside beta of `y` on `x` as defined in Ang & Chen. 
+
+`kind=:onx` allows to condition only on `x`.
+"""
+function downsidebeta(x,y;kind=:both)
+	mux = mean(x)
+	muy = mean(y)
+	if kind==:both
+		loc = (x .<= mux) .& (y .<= muy)
+	elseif kind==:onx
+		loc = (x .<= mux)
+	end
+	xtmp = x[loc]
+	ytmp = y[loc]
+	varx = var(xtmp)
+	covxy = cov(xtmp,ytmp)
+	return covxy/varx
+end
+
+
+
+"""
+	upsidebeta(x,y;kind=:both)
+
+Computes the upside beta of `y` on `x` as defined in Ang & Chen. 
+
+`kind=:onx` allows to condition only on `x`.
+"""
+function upsidebeta(x,y;kind=:both)
+	mux = mean(x)
+	muy = mean(y)
+	if kind==:both
+		loc = (x .>= mux) .& (y .>= muy)
+	elseif kind==:onx
+		loc = (x .>= mux)
+	end
+	xtmp = x[loc]
+	ytmp = y[loc]
+	varx = var(xtmp)
+	covxy = cov(xtmp,ytmp)
+	return covxy/varx
+end
+
+
 # x here is "the market return"
 
 @doc raw"""
@@ -66,6 +145,7 @@ function cokurtosis(x,y;kind::Symbol=:asymmetric)
 end
 
 
+
 #### TODO
 # - better API
 
@@ -100,28 +180,10 @@ function upsidecor(x,y)
     return out
 end
 
-function angchen(x,y)
-    qs = 0.15:0.025:0.5
-    out = zeros(length(qs)+1)
-    for (i,qi) in enumerate(qs)
-        qj = 1 - qi
-        qxi = quantile(x,qi)
-        qyi = quantile(y,qi)
-        qxj = quantile(x,qj)
-        qyj = quantile(y,qj)
-        tmpxi = filter(xx-> xx <=qxi,x)
-        tmpyi = filter(yy-> yy <=qyi,y)
-        tmpxj = filter(xx-> xx >qxj,x)
-        tmpyj = filter(yy-> yy >qyj,y)
-        out[i] = cor(tmpxi,tmpyi)
-        out[end-(i-1)] = cor(tmpxj,tmpyj)
-    end
-    return out
-end
 
 
 ##### Asymmetry test from Guofu Zhou et al.
-standardize(x) = (x .- mean(x)) ./ std(x)
+#standardize(x) = (x .- mean(x)) ./ std(x)
 bartlett(z) = abs(z) < 1 ? (1-abs(z)) : zero(eltype(z))
 # this only does 1 value of c
 function buildEC(x,y,c)
