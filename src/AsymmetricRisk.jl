@@ -8,9 +8,9 @@ using Distributions
 # using GLM
 # using NamedTupleTools
 
-export lowerpartialmom
+export semivariance, lowerpartialmom, upperpartialmom
 
-export quantiledep
+export quantiledep, exceedancecor, downsidebeta, upsidebeta, coskewness, cokurtosis
 
 
 include("univariate.jl")

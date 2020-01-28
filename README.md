@@ -25,7 +25,7 @@ Bivariate measures:
 ## Usage
 From the Julia REPL type
 ```
-]add https://github.com/tbeason/AsymmetricRisk.jl.git
+]add https://github.com/tbeason/AsymmetricRisk.jl
 ```
 which will clone the repository.
 
