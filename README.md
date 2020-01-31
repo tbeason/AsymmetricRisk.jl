@@ -1,5 +1,8 @@
 # AsymmetricRisk.jl
 
+_This package is currently under development._
+
+
 [![](https://img.shields.io/badge/docs-stable-blue.svg)](https://tbeason.github.io/AsymmetricRisk.jl/stable)
 [![](https://img.shields.io/badge/docs-dev-blue.svg)](https://tbeason.github.io/AsymmetricRisk.jl/dev)
 
@@ -8,7 +11,6 @@
 
 Traditional measures of risk, such as the variance of a time series or the covariance between two time series, use all available data points (aka information) when computing the statistical measure. However, it is becoming common to consider separately the notions of "upside" and "downside" risks. For example, a large literature has documented that people fear losses more than they like gains of similar magnitude. This package contains implementations of several asymmetric risk measures that have been published in financial and economics research.
 
-_This package is currently under development._
 
 Univariate measures:
  - [X] Variance-based (semi-variance)
